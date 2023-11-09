@@ -49,9 +49,8 @@ const LeftSidebar = () => {
             return (
               <li
                 key={i}
-                className={`leftsidebar-link group ${
-                  isActive && "bg-primary-500"
-                }`}
+                className={`leftsidebar-link group ${isActive && "bg-primary-500"
+                  }`}
               >
                 <NavLink
                   to={link.route}
@@ -60,9 +59,8 @@ const LeftSidebar = () => {
                   <img
                     src={link.imgURL}
                     alt={link.label}
-                    className={`group-hover:invert-white ${
-                      isActive && "invert-white"
-                    }`}
+                    className={`group-hover:invert-white ${isActive && "invert-white"
+                      }`}
                   />
                   {link.label}
                 </NavLink>
