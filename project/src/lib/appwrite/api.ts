@@ -303,7 +303,7 @@ export async function updatePost(post: IUpdatePost) {
         tags: tags,
       }
     );
-    
+
     if (!updatedPost) {
       await deleteFile(post.imageId);
       throw Error;
@@ -326,6 +326,44 @@ export async function deletePost(postId: string, imageId: string) {
     );
 
     return { status: "ok" };
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getInfinitePosts({ pageParam }: { pageParam: number }) {
+  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(10)];
+
+  if (pageParam) {
+    queries.push(Query.cursorAfter(pageParam.toString()));
+  }
+
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseID,
+      appwriteConfig.postsCollectionID,
+      queries
+    );
+
+    if (!posts) throw Error;
+
+    return posts;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function searchPosts(searchTerm: string) {
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseID,
+      appwriteConfig.postsCollectionID,
+      [Query.search("caption", searchTerm)]
+    );
+
+    if (!posts) throw Error;
+
+    return posts;
   } catch (error) {
     console.log(error);
   }
