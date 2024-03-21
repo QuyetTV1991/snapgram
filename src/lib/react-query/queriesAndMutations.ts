@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-  useQuery,
+  // useQuery,
   useMutation,
-  useQueryClient,
-  useInfiniteQuery,
+  // useQueryClient,
+  // useInfiniteQuery,
 } from "@tanstack/react-query";
 import { createUserAccount, signInAccount } from "../appwrite/api";
 import { INewUser } from "@/types";
