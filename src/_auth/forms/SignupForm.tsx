@@ -15,14 +15,17 @@ import {
 import { Input } from "@/components/ui/input";
 import { SignupValidationSchema } from "@/lib/validation";
 import Loader from "@/components/shared/Loader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   useCreateUserAccount,
   useSignInAccount,
 } from "@/lib/react-query/queriesAndMutations";
+import { useUserContext } from "@/context/AuthContext";
 
 const SignupForm = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
 
   const { mutateAsync: createUserAccount, isPending: isCreatingUser } =
     useCreateUserAccount();
@@ -57,11 +60,20 @@ const SignupForm = () => {
       password: values.password,
     });
 
-    if(!session) {
-      return toast({title: 'Sign in failed. Please try again.'})
+    if (!session) {
+      return toast({ title: "Sign in failed. Please try again." });
     }
 
-    
+    const isLoggedIn = await checkAuthUser();
+
+    if (isLoggedIn) {
+      form.reset();
+      navigate("/");
+    } else {
+      return toast({
+        title: "Sign in failed. Please try again.",
+      });
+    }
   }
   return (
     <Form {...form}>
