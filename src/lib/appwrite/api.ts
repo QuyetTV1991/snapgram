@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ID, Query } from "appwrite";
 
 import { appwriteConfig, account, databases, avatars } from "./config";
@@ -62,7 +61,7 @@ export async function saveUserToDB(user: {
 // ============================== SIGN IN
 export async function signInAccount(user: { email: string; password: string }) {
   try {
-    const session = await account.createEmailPasswordSession(
+    const session = await account.createEmailSession(
       user.email,
       user.password
     );
