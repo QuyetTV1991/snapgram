@@ -7,10 +7,9 @@ type FileUploaderProps = {
   mediaUrl: string;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
   const [file, setFile] = useState<File[]>([]);
-  const [fileUrl, setFileUrl] = useState("");
+  const [fileUrl, setFileUrl] = useState<string>(mediaUrl);
 
   const onDrop = useCallback(
     (acceptedFiles: FileWithPath[]) => {

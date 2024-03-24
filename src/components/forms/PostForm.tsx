@@ -29,7 +29,6 @@ const PostForm = ({ post }: PostFormProps) => {
   const { user } = useUserContext();
   const { toast } = useToast();
   const navigate = useNavigate();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { mutateAsync: createPost, isPending: isLoadingCreate } =
     useCreatePost();
 
@@ -142,6 +141,7 @@ const PostForm = ({ post }: PostFormProps) => {
           <Button
             type="submit"
             className="shad-button_primary whitespace-nowrap"
+            disabled={isLoadingCreate}
           >
             Submit
           </Button>
