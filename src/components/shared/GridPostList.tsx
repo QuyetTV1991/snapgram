@@ -15,6 +15,14 @@ const GridPostList = ({
 }: GridPostListProps) => {
   const { user } = useUserContext();
 
+  if (posts.length === 0) {
+    return (
+      <div className="small-medium text-center text-light-3">
+        No Post available
+      </div>
+    );
+  }
+
   return (
     <ul className="grid-container">
       {posts.map((post) => (
