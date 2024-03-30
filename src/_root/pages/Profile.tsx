@@ -93,38 +93,40 @@ const Profile = () => {
         </div>
       </div>
       {/* Filter */}
-      <div className="flex w-full justify-between gap-4">
-        <div className="flex gap-4">
-          <Link
-            to={`/profile/${id}`}
-            className={`profile-tab rounded-lg ${
-              pathname === `/profile/${id}` && "!bg-dark-3"
-            }`}
-          >
-            <img
-              src={"/assets/icons/posts.svg"}
-              alt="posts"
-              width={20}
-              height={20}
-            />
-            Posts
-          </Link>
-          {userProfile.$id === currentUser.id && (
+      <div className="profile-inner_container">
+        <div className="flex w-full justify-between gap-4">
+          <div className="flex gap-4">
             <Link
-              to={`/profile/${id}/liked-posts`}
+              to={`/profile/${id}`}
               className={`profile-tab rounded-lg ${
-                pathname === `/profile/${id}/liked-posts` && "!bg-dark-3"
+                pathname === `/profile/${id}` && "!bg-dark-3"
               }`}
             >
               <img
-                src={"/assets/icons/like.svg"}
-                alt="like"
+                src={"/assets/icons/posts.svg"}
+                alt="posts"
                 width={20}
                 height={20}
               />
-              Liked Posts
+              Posts
             </Link>
-          )}
+            {userProfile.$id === currentUser.id && (
+              <Link
+                to={`/profile/${id}/liked-posts`}
+                className={`profile-tab rounded-lg ${
+                  pathname === `/profile/${id}/liked-posts` && "!bg-dark-3"
+                }`}
+              >
+                <img
+                  src={"/assets/icons/like.svg"}
+                  alt="like"
+                  width={20}
+                  height={20}
+                />
+                Liked Posts
+              </Link>
+            )}
+          </div>
         </div>
 
         <div className="flex-center gap-3 rounded-xl bg-dark-3 px-4 py-2 cursor-pointer">
