@@ -34,9 +34,6 @@ const Profile = () => {
 
   const { data: userProfile } = useGetUserById(id || "");
 
-  console.log({ currentUser });
-  console.log({ userProfile });
-
   if (!userProfile) return <Loader />;
 
   return (
@@ -87,46 +84,44 @@ const Profile = () => {
               </div>
             </div>
             <p className="small-medium md:base-medium text-center xl:text-left mt-7 max-w-screen-sm">
-              {currentUser.bio}
+              {userProfile.bio}
             </p>
           </div>
         </div>
       </div>
       {/* Filter */}
-      <div className="profile-inner_container">
-        <div className="flex w-full justify-between gap-4">
-          <div className="flex gap-4">
+      <div className="profile-inner_container justify-between !flex-row">
+        <div className="flex gap-4">
+          <Link
+            to={`/profile/${id}`}
+            className={`profile-tab rounded-lg ${
+              pathname === `/profile/${id}` && "!bg-light-4"
+            }`}
+          >
+            <img
+              src={"/assets/icons/posts.svg"}
+              alt="posts"
+              width={20}
+              height={20}
+            />
+            Posts
+          </Link>
+          {userProfile.$id === currentUser.id && (
             <Link
-              to={`/profile/${id}`}
+              to={`/profile/${id}/liked-posts`}
               className={`profile-tab rounded-lg ${
-                pathname === `/profile/${id}` && "!bg-dark-3"
+                pathname === `/profile/${id}/liked-posts` && "!bg-light-4"
               }`}
             >
               <img
-                src={"/assets/icons/posts.svg"}
-                alt="posts"
+                src={"/assets/icons/like.svg"}
+                alt="like"
                 width={20}
                 height={20}
               />
-              Posts
+              Liked Posts
             </Link>
-            {userProfile.$id === currentUser.id && (
-              <Link
-                to={`/profile/${id}/liked-posts`}
-                className={`profile-tab rounded-lg ${
-                  pathname === `/profile/${id}/liked-posts` && "!bg-dark-3"
-                }`}
-              >
-                <img
-                  src={"/assets/icons/like.svg"}
-                  alt="like"
-                  width={20}
-                  height={20}
-                />
-                Liked Posts
-              </Link>
-            )}
-          </div>
+          )}
         </div>
 
         <div className="flex-center gap-3 rounded-xl bg-dark-3 px-4 py-2 cursor-pointer">

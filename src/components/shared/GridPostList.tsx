@@ -17,8 +17,8 @@ const GridPostList = ({
 
   if (posts.length === 0) {
     return (
-      <div className="small-medium text-center text-light-3">
-        No Post available
+      <div className="w-full h-full flex-center">
+        <p className="text-light-4">No Post</p>
       </div>
     );
   }
